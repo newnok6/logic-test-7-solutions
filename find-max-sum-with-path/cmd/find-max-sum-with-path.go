@@ -5,7 +5,7 @@ import (
 )
 
 func maxPathSum(data [][]int) int {
-	startRow := len(data) - 2              // Row start on length of the triangle - 1
+	startRow := len(data) - 2              // Row start on length of the height - 1
 	for row := startRow; row >= 0; row-- { // calculate from the startRow and traveling to upper node
 		startColumn := len(data[row]) // start with index 0 on each row
 		for col := 0; col < startColumn; col++ {
