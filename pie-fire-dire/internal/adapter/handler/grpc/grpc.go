@@ -78,5 +78,3 @@ func (s *service) GetMeat(ctx context.Context, req *pb.MeatRequest) (*pb.MeatRep
 	}
 	return reply, nil
 }
-
-// GetMeat implements the GetMeat method required by the MeatServiceServer interface.
