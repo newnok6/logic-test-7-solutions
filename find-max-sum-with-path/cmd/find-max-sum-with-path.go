@@ -1,7 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
+	"log"
+	"os"
+	"path/filepath"
 )
 
 func maxPathSum(data [][]int) int {
@@ -26,13 +31,33 @@ func maxPathSum(data [][]int) int {
 	return data[0][0]
 }
 
-func main() {
-	data := [][]int{
-		{59},
-		{73, 41},
-		{52, 40, 53},
-		{26, 53, 6, 34},
+func readDataFromFile(filePath string) [][]int {
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Fatalf("Failed to open file: %v", err)
 	}
+	defer file.Close()
+
+	byteValue, err := io.ReadAll(file)
+	if err != nil {
+		log.Fatalf("Failed to read file: %v", err)
+	}
+
+	var data [][]int
+	err = json.Unmarshal(byteValue, &data)
+	if err != nil {
+		log.Fatalf("Failed to parse JSON: %v", err)
+	}
+
+	return data
+}
+
+func main() {
+	abs, err := filepath.Abs("./find-max-sum-with-path/files/number.json")
+	if err == nil {
+		fmt.Println("Absolute:", abs)
+	}
+	data := readDataFromFile(abs)
 
 	result := maxPathSum(data)
 	fmt.Println("Maximum path sum:", result)
