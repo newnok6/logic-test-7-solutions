@@ -34,7 +34,7 @@ func (s *Server) Start() {
 		log.Fatalf("gRPC listen error: %v", err)
 	}
 
-	pb.RegisterMeatServiceServer(s.grpcServer, &service{}) // Implement your service
+	pb.RegisterMeatServiceServer(s.grpcServer, &service{})
 	log.Printf("gRPC server running at %s\n", s.address)
 
 	if err := s.grpcServer.Serve(s.listener); err != nil {
@@ -52,8 +52,6 @@ type service struct {
 }
 
 func (s *service) GetMeat(ctx context.Context, req *pb.MeatRequest) (*pb.MeatReply, error) {
-	// Implement your logic here
-	// For example, you can return a dummy response
 	fileName := "file.txt"
 	filePath := "/Users/panupak/Projects/logic-test/pie-fire-dire/files"
 	fileType := "txt"
